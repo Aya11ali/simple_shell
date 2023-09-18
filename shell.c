@@ -26,7 +26,10 @@ int main(int ac, char **argv)
 
 		command = tokenizer(line);
 		if (!command)
+		{
+			free(command);
 			continue;
+		}
 
 		status = _execute(command, argv);
 	}

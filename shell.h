@@ -28,5 +28,9 @@ void reverse_string(char *str, int len);
 void printerror(char *name, char *cmd, int ind);
 char *_itoa(int n);
 char *_getenv(char *variable);
+int is_builtin(char *command);
+void handle_builtin(char **command, char **argv, int *status, int idx);
+void exit_shell(char **command, int *status);
+void print_env(char **command, int *status);
 
 #endif

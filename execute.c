@@ -6,27 +6,33 @@
  *@argv: ..
  *Return: status of the child
  */
-int _execute(char **command, char **argv)
-{
+ int _execute(char **command, char **argv, int idx)
+{    
+    char *fullcmd;
 	pid_t child;
 	int status;
-
+	
+    fullcmd = _getpath(command[0]);
+    if (!fullcmd)
+    {
+        printerror(argv[0], command[0], idx);
+        free_array(command);
+        return (127);
+    }
 	child = fork();
 	if (child == 0)
 	{
-		if (execve(command[0], command, environ) == -1)
-		{
-			perror(argv[0]);
+		if (execve(fullcmd, command, environ) == -1)
+		{    
+		    free(fullcmd), fullcmd = NULL;
 			free_array(command);
-			exit(0);
 		}
 	}
 	else
 	{
 		waitpid(child, &status, 0);
 		free_array(command);
+		free(fullcmd), fullcmd = NULL;
 	}
-
 	return (WEXITSTATUS(status));
-
 }

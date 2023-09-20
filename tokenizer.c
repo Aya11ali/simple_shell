@@ -1,36 +1,57 @@
 #include "shell.h"
 
 /**
- *tokenizer - ...
+ *count_tokens - ...
  *@line: ..
- *Return: string
+ *Return: counter
  */
-char **tokenizer(char *line)
+
+int count_tokens(char *line)
 {
 	char *token = NULL, *tmp = NULL;
-	char **command = NULL;
-	int c = 0, i = 0;
+	int count = 0;
 
 	if (!line)
-		return (NULL);
+		return (0);
+
 	tmp = _strdup(line);
 	token = strtok(tmp, DELIM);
 	if (token == NULL)
 	{
-		free(line), line = NULL;
 		free(tmp), tmp = NULL;
-		return (NULL);
+		return (0);
 	}
 
 	while (token)
 	{
-		c++;
+		count++;
 		token = strtok(NULL, DELIM);
 	}
 
 	free(tmp), tmp = NULL;
+	return (count);
+}
 
-	command = malloc(sizeof(char *) * (c + 1));
+/**
+ *tokenizer - ...
+ *@line: ..
+ *Return: string
+ */
+
+char **tokenizer(char *line)
+{
+	char *token = NULL;
+	char **command = NULL;
+	int num_tokens = count_tokens(line);
+	int i = 0;
+
+	if (num_tokens == 0)
+	{
+		free(line), line = NULL;
+		return (NULL);
+	}
+
+	command = malloc(sizeof(char *) * (num_tokens + 1));
 	if (!command)
 	{
 		free(line), line = NULL;

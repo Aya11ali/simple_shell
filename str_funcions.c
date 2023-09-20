@@ -25,14 +25,17 @@ int _strlen(char *s)
  */
 int _strcmp(char *s1, char *s2)
 {
-	int i;
-
-	for (i = 0; ((s1[i] != '\0') || (s2[i] != '\0')); i++)
+	int nn;
+	nn = (int)*s1 - (int)*s2;
+	while(*s1)
 	{
-		if (s1[i] - s2[i] != 0)
-			return (s1[i] - s2[i]);
+		if(*s1 != *s2)
+			break;
+		s1++;
+		s2++;
+		nn = (int)*s1 - (int)*s2;
 	}
-	return (0);
+	return(nn);
 }
 
 /**

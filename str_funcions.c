@@ -3,7 +3,7 @@
 /**
  * _strlen - returns the length of a string.
  * @s: char pointer
- * Return: the length of the string 
+ * Return: the length of the string
  */
 int _strlen(char *s)
 {
@@ -45,18 +45,18 @@ char *_strdup(char *str)
 	char *ptr;
 	int i, len = 0;
 
-	if(str == NULL)
-		return(NULL);
-	while(*str != '\0')
+	if (str == NULL)
+		return (NULL);
+	while (*str != '\0')
 	{
 		len++;
 		str++;
 	}
 	str = str - len;
 	ptr = malloc(sizeof(char) * (len + 1));
-	if(ptr == NULL)
-		return(NULL);
-	for(i = 0; i <= len; i++)
+	if (ptr == NULL)
+		return (NULL);
+	for (i = 0; i <= len; i++)
 		ptr[i] = str[i];
 	return (ptr);
 

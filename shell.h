@@ -30,7 +30,9 @@ char *_itoa(int n);
 char *_getenv(char *variable);
 int is_builtin(char *command);
 void handle_builtin(char **command, char **argv, int *status, int idx);
-void exit_shell(char **command, int *status);
+void exit_shell(char **command, char **argv, int *status, int idx);
 void print_env(char **command, int *status);
+int is_positive(char *str);
+int _atoi(char *str);
 
 #endif
